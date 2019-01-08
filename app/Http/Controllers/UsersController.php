@@ -10,6 +10,9 @@ use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Repositories\UserRepository;
 use App\Services\UserService;
+use App\Models\Profile;
+use App\Models\User;
+
 
 /**
  * Class UsersController.
@@ -42,17 +45,17 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $users = $this->repository->all();
+        //$this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
+        $users = User::all();
+        //$profiles   = $this->repository->all();
+        $profiles  = Profile::all();
 
-        if (request()->wantsJson()) {
+        return view('user.index',[
+            'users' => $users,
+            'profiles'   => $profiles,
+        ]);
 
-            return response()->json([
-                'data' => $users,
-            ]);
-        }
-
-        return view('users.index', compact('users'));
+        //return view('user.index', compact('users'));
     }
 
     /**

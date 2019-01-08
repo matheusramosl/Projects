@@ -81,5 +81,12 @@ class AuthServiceProvider extends ServiceProvider
 
             return false;
         });
+        Gate::define( 'access-finaces-resource', function($user) {
+            if ($user->isDiretor() || $user->isAdmin()) {
+                return true;
+            }
+
+            return false;
+        });
     }
 }

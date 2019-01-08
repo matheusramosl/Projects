@@ -49,6 +49,7 @@ Route::group(['middleware' => ['auth','can:access-professor-resource']], functio
 	Route::get('/novoProfessor', ['as' => 'professor.cadastro','uses' => 'ProfessorsController@cadastroProfessor']);
 	Route::get('/professor_secretario', ['as' => 'professor.secretario','uses' => 'ProfessorsController@indexSecretario']);
 	Route::get('/professor_chamada', ['as' => 'professor.index-professor','uses' => 'ProfessorsController@indexProfessor']);
+	Route::post('professors', 'ProfessorsController@search1')->name('professor.search1');
 });
 /*
 ------------------Rotas de Aluno-------------------
@@ -85,8 +86,11 @@ Route::group(['middleware' => ['auth','can:access-grid-resource']], function(){
 /*
 ------------------Rotas de Finanças------------------
 */
-
-Route::resource('finance', 'FinancesController');
+Route::group(['middleware' => ['auth','can:access-finaces-resource']], function(){
+	Route::resource('finance', 'FinancesController');
+	Route::get('/novoPlano', ['as' => 'finance.cadastro','uses' => 'FinancesController@cadastroFinance']);
+	//Route::get('/grade_secretario', ['as' => 'grid.secretario', 'uses' => 'GridsController@indexSecretario']);
+});
 
 
 //Auth::routes();

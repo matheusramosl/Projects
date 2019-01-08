@@ -37,17 +37,13 @@
 			</a>
 		</li>
 		<li>
-			<a href="{{ route('user.cadastro') }}">
+			<a href="{{ route('user.index') }}">
 				<i class="far fa-address-card"></i>
-				<h3>Cadastro</h3>			
+				<h3>Usuários</h3>			
 			</a>
-				<ul> 
-			        <li><a href="#"><i class="far fa-address-card"></i>
-						<h3>Usuarios</h3></a></li>  
-      			</ul> 
 		</li>
 		<li>
-			<a href="">
+			<a href="{{ route('finance.index')}}">
 				<i class="fas fa-money-check-alt"></i>
 				<h3>Finanças</h3>			
 			</a>

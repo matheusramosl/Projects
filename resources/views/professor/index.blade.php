@@ -13,6 +13,14 @@
 	@endif
 
 <a id="defalt-a" href="{{route('professor.cadastro')}}">Novo Professor</a>
+
+<form action="{{ route('professor.search1') }}" method="POST" class="">
+	{!! csrf_field() !!}
+		<input type="text" name="name" id="search1" placeholder="Pesquisar Nome" >
+		<input type="text" name="id"   id="search1" placeholder="Matricula" >
+		<button type="submit"><i class="fa fa-search"></i></button>
+</form>
+
 <table class="default-table">
 	<thead>
 		<tr>

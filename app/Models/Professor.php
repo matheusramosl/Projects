@@ -26,6 +26,17 @@ class Professor extends Model implements Transformable
     public function cursos(){
         return $this->hasMany(Curso::class);
     }
+
+    public function search1(Array $data){
+        return $this->where(function($query) use ($data){
+            if (isset($data['name'])) 
+                $query->where('name', 'like', '%'.$data['name'].'%' );
+
+             if (isset($data['id'])) 
+                $query->where('id', $data['id'] );
+        })
+        ->paginate();     
+    }
     
 
 }

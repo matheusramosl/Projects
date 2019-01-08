@@ -13,6 +13,7 @@ use App\Repositories\ProfessorRepository;
 use App\Repositories\StudentRepository;
 use App\Services\ProfessorService;
 use App\Models\Curso;
+use App\Models\Professor;
 use DB;
 
 /**
@@ -155,5 +156,15 @@ class ProfessorsController extends Controller
         $this->repository->delete($professor_id);
 
         return redirect()->route('professor.index');
+    }
+
+    public function search1(Request $request, Professor $professor){
+
+        $data = $request->all();
+
+        $professors = $professor->search1($data);
+        //dd($professors);
+        return view('professor.index', compact('professors'));
+
     }
 }

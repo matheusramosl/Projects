@@ -154,46 +154,4 @@ class StudentsController extends Controller
 
     }
 
-    /*public function action(Request $request){
-
-        if ($request->ajax()) {
-            $query = $request->get('query');
-            if ($query != '') {
-                $data = DB::table('students')
-                        ->where('name', 'like', '%'.$query.'%')
-                        ->orWhere('igreja', 'like', '%'.$query.'%')
-                        ->orWhere('phone', 'like', '%'.$query.'%')
-                        ->orWhere('email', 'like', '%'.$query.'%')
-                        ->orderBy('id', 'desc')
-                        ->get();
-            }
-            else{
-                $data = DB::table('students')
-                        ->orderBy('id', 'desc')
-                        ->get();
-
-            }
-            $total_row = $data->count();
-            if ($total_row > 0) {
-
-                foreach ($data as $row) {
-                   $output .='
-                    <tr>
-                        <td>'.$row->name.'</td>
-                    </tr>
-                   ';
-                }
-            }
-            else{
-                $output = 'nothing';
-            }
-            $data = array(
-                'table_data'    => $output,
-                'total_data'    => $total_data
-            );
-            echo json_encode($data);
-        }
-        
-
-    }*/
 }

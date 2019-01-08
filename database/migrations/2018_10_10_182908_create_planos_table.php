@@ -4,7 +4,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 /**
- * Class CreatePlanosTable.
+ * Class CreatePaymentsTable.
  */
 class CreatePlanosTable extends Migration
 {

@@ -31,16 +31,14 @@ class Students extends Model implements Transformable
         $birth = $this->attributes['birth'];
         return substr($birth, 0, 2).'/'.substr($birth, 3, 2).'/'.substr($birth, -4);
         //carbon
-    }
+    }*/
 
     public function setBirthAttribute($value){
        
         if(empty($value))
             return null;
-        $birth = $value;
-         dd(substr($birth, 0, 2).'/'.substr($birth, 3, 2).'/'.substr($birth, -4));
-        return substr($birth, 0, 2).'/'.substr($birth, 3, 2).'/'.substr($birth, -4);
-    }*/
+        $this->attributes['birth'] = Carbon::parse($value)->format('Y/m/d');
+    }
 
     public function getBirthAttribute($value)
     {
