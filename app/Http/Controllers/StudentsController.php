@@ -15,6 +15,9 @@ use App\Repositories\PaymentsRepository;
 use App\Services\StudentService;
 use App\Models\Students;
 use App\Models\Curso;
+use App\Models\Finance;
+use App\Models\AlunoPlano;
+use Carbon\Carbon;
 use DB;
 
 /**
@@ -73,20 +76,31 @@ class StudentsController extends Controller
     }
 
    public function cadastroAluno(){
+        $curso = new Curso();
+        $finance = new Finance();
+        
+        $cursos = $curso->getSelectbox();
+        $planos = $finance->getSelectbox();
 
-        $curso_list   =   $this->cursoRepository->selectBoxList();
-
-        return view('student.cadastro',[
-            'curso_list'   => $curso_list,
-        ]);
+        return view('student.cadastro', compact('cursos','planos'));
     }
 
     public function store(StudentCreateRequest $request)
-    {
-    
+    {        
         $status  = $this->service->store($request->all());
         $student = $status['success'] ? $status['data'] : null;    
         $student->cursos()->attach($request->curso_id);
+
+        $finance = Finance::find($request->plano_id);
+        for ( $i = 0; $i < $finance->quant_parcelas; $i++) { 
+            $alunoPlano = new AlunoPlano;
+            $alunoPlano->plano_id = $request->plano_id;
+            $alunoPlano->curso_id = $request->curso_id;
+            $alunoPlano->student_id = $student->id;
+            $alunoPlano->data_vencimento = Carbon::now()->addMonths($i); //@todo: alterar para pegar a data de vencimento inicial do form
+            
+            $alunoPlano->save();
+        }
        
         session()->flash('success',[
             'success'  => $request['success'],

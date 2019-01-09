@@ -46,5 +46,15 @@ class Finance extends Model implements Transformable
 	public function getValorEscolaAttribute(){
 		return str_replace('.', ',', $this->attributes['valor_escola']);
 	}
+
+	public function getSelectbox() {
+		$arr = $this->all();
+		$result = [];
+		foreach ($arr as $value) {
+				$result[$value->id] = $value->nome_plano;
+		}
+
+		return $result;
+}
 	
 }

@@ -41,4 +41,14 @@ class Curso extends Model implements Transformable
         ->paginate();
     }
 
+    public function getSelectbox() {
+        $arr = $this->all();
+        $result = [];
+        foreach ($arr as $value) {
+            $result[$value->id] = $value->name;
+        }
+
+        return $result;
+    }
+
 }
