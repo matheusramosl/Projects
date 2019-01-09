@@ -36,7 +36,7 @@ Route::group(['middleware' => ['auth','can:access-user-resource']], function(){
 ------------------Rotas do usuario-------------------
 */
 
-Route::get('/login', ['uses' => 'Controller@fazerLogin']);
+Route::get('/', ['uses' => 'Controller@fazerLogin']);
 Route::post('/login', ['as' => 'user.login','uses' => 'DashboardController@auth']);
 
 

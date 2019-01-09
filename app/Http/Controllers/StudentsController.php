@@ -96,13 +96,9 @@ class StudentsController extends Controller
         return redirect()->route('student.index');
     }
 
-    public function show($id)
+    public function show(Students $student)
     {
-        $student = $this->repository->find($id);
-
-        return view('student.show',[
-            'student' => $student,
-        ]);
+        return view('student.show', compact('student') );
     }
 
     public function edit($id)

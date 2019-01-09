@@ -51,12 +51,12 @@ class Students extends Model implements Transformable
         return substr($phone, 0, 5).'-'.substr($phone, -4);
     }
 
-    /*public function payments(){
-        return $this->belongsTo(Payments::class, 'payment_id');
-    }*/
-
     public function cursos(){
         return $this->belongsToMany(Curso::class, 'curso_students', 'student_id', 'curso_id');
+    }
+
+    public function planos(){
+        return $this->hasMany(AlunoPlano::class, 'student_id');
     }
 
     public function search(Array $data){

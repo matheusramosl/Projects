@@ -15,7 +15,7 @@
 		@include('templates.formulario.imput',['label'=> 'Valor para o Professor','imput' => 'valor_prof', 'attributes' => ['placeholder' => 'Ex:150']])
 		@include('templates.formulario.imput',['label'=> 'Valor para a Escola De Música','imput' => 'valor_escola', 'attributes' => ['placeholder' => 'Ex:200']])
 		@include('templates.formulario.imput',['label'=> 'Quantidade de Parcelas','imput' => 'quant_parcelas', 'attributes' => ['placeholder' => 'Ex:1']])
-		@include('templates.formulario.submit',['imput' => 'Inserir'])
+		@include('templates.formulario.submit',['imput' => 'Salvar'])
 	{!! Form::close() !!}
 
 @endsection

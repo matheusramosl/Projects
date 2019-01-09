@@ -10,25 +10,22 @@
 		<tr>
 			<td>Curso</td>
 			<td>Sala</td>
-			<td>Forma de Pagamento</td>
 			<td>Horário</td>
-			
+			<td>Plano</td>
 		</tr>
 		
 	</thead>
 	<tbody>
-		@foreach($student->cursos as $curso)
+		@foreach($student->planos as $alunoPlano)
 		<tr>
-			<td>{{ $curso->name}}</td>
+			<td>{{ $alunoPlano->curso->name}}</td>
 			<td>
-				@foreach($curso->salas as $sala)
+				@foreach($alunoPlano->curso->salas as $sala)
 				{{ $sala->name }}
 				@endforeach
 			</td>
-			<td>
-				
-			</td>
-			<td>{{ $curso->horarios}}</td>
+			<td>{{ $alunoPlano->curso->horarios}}</td>
+			<td>{{ $alunoPlano->plano->nome_plano}}</td>
 		</tr>
 		@endforeach
 	</tbody>
