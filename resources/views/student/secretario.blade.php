@@ -12,9 +12,14 @@
 		<h3>{{ session('success')['messages'] }}<h3>	
 	@endif
 
-<a id="defalt-a" href="{{route('student.cadastro')}}">Novo Aluno</a>
+<a id="defalt-a" href="{{route('student.sec_cadastro')}}">Novo Aluno</a>
 
-
+<form action="{{ route('student.searchS') }}" method="POST" class="">
+	{!! csrf_field() !!}
+		<input type="text" name="name" id="search" placeholder="Pesquisar Nome" >
+		<input type="text" name="id"   id="search" placeholder="Matricula" >
+		<button type="submit"><i class="fa fa-search"></i></button>
+</form>
 
 <table class="default-table">
 	<thead>

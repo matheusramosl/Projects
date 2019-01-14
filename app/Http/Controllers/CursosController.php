@@ -79,6 +79,33 @@ class CursosController extends Controller
         ]);
     }
 
+    public function cadastroCursoSec(){
+
+        $professor_list = $this->professorRepository->selectBoxList();
+        $sala_list      = $this->salaRepository->selectBoxList();
+
+
+        return view('curso.sec_cadastro',[
+            'professor_list' => $professor_list,
+            'sala_list'      => $sala_list,
+        ]);
+    }
+
+    public function storeSec(CursoCreateRequest $request)
+    {
+        $status = $this->service->store($request->all());
+        $curso = $status['success'] ? $status['data'] : null;
+        $curso->salas()->attach($request->sala_id);
+        
+        session()->flash('success',[
+            'success'  => $request['success'],
+            'messages' => $request['messages'],   
+        ]);
+
+        return redirect()->route('curso.secretario');
+    }
+
+
 
     public function store(CursoCreateRequest $request)
     {

@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class AlunoPlano extends Model
 {
     protected $table = 'aluno_plano';
+    protected $fillable = [
+        'data_pagamento',
+    ];
+
+
     public function curso(){
         return $this->belongsTo(Curso::class);
     }

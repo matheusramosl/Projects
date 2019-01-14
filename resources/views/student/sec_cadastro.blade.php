@@ -1,4 +1,4 @@
-@extends('templates.master')
+@extends('templates.master-secretario')
 
 @section('css-view')
 @endsection
@@ -9,7 +9,7 @@
 @section('conteudo-view')
 
 
-	{!! Form::open(['route' => 'student.store', 'method' => 'post', 'class' => 'form-padrao']) !!}
+	{!! Form::open(['route' => 'student.storeSec', 'method' => 'post', 'class' => 'form-padrao']) !!}
 		@include('templates.formulario.imput',['imput' => 'name', 'attributes' => ['placeholder' => 'Nome']])
 		@include('templates.formulario.imput',['imput' => 'phone', 'attributes' => ['placeholder' => 'Telefone']])
 		@include('templates.formulario.select',['label'=> 'Curso', 'select' => 'curso_id', 'value' => $cursos, 'attributes' => ['placeholder' => 'Curso']])

@@ -40,7 +40,7 @@ class LoginController extends Controller
         auth()->logout();       
         session()->flash('message', 'Adeus');
 
-        return redirect('/login');
+        return redirect('/');
     }
 
     protected function authenticated(Request $request, $user)

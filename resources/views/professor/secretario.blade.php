@@ -12,7 +12,14 @@
 		<h3>{{ session('success')['messages'] }}<h3>	
 	@endif
 
-<a id="defalt-a" href="{{route('professor.cadastro')}}">Novo Professor</a>
+<a id="defalt-a" href="{{route('professor.sec_cadastro')}}">Novo Professor</a>
+
+<form action="{{ route('professor.search2') }}" method="POST" class="">
+	{!! csrf_field() !!}
+		<input type="text" name="name" id="search1" placeholder="Pesquisar Nome" >
+		<input type="text" name="id"   id="search1" placeholder="Matricula" >
+		<button type="submit"><i class="fa fa-search"></i></button>
+</form>
 <table class="default-table">
 	<thead>
 		<tr>
@@ -28,7 +35,7 @@
 		@foreach($professors as $professor)
 		<tr>
 			<td>{{ $professor->id }}</td>
-			<td><a href="{{ route('professor.show', $professor->id) }}">{{ $professor->name }}</a></td>
+			<td><a href="{{ route('professor.sec_show', $professor->id) }}">{{ $professor->name }}</a></td>
 			<td>{{ $professor->phone }}</td>
 			<td>{{ $professor->email }}</td>
 			<td>{{ $professor->igreja }}</td>

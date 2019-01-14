@@ -15,6 +15,7 @@ class Students extends Model implements Transformable
     use SoftDeletes;
 
     public $timestamps = true;
+    protected $table    = 'students';
     protected $fillable = [
     	'name',
     	'igreja',
@@ -37,13 +38,13 @@ class Students extends Model implements Transformable
        
         if(empty($value))
             return null;
-        $this->attributes['birth'] = Carbon::parse($value)->format('Y/m/d');
+        $this->attributes['birth'] = Carbon::parse($value)->format('Y-m-d');
     }
 
     public function getBirthAttribute($value)
     {
         if(!empty($this->attributes['birth']))
-        return Carbon::parse($value)->format('d/m/Y');
+        return Carbon::parse($value)->format('d-m-Y');
     }
 
     public function getPhoneAttribute(){
@@ -58,6 +59,9 @@ class Students extends Model implements Transformable
     public function planos(){
         return $this->hasMany(AlunoPlano::class, 'student_id');
     }
+    public function finances(){
+        return $this->belongsTo(Finance::class, 'plano_id');
+    }
 
     public function search(Array $data){
         return $this->where(function($query) use ($data){
@@ -69,4 +73,7 @@ class Students extends Model implements Transformable
         })
         ->paginate();     
     }
+
+
+
 }

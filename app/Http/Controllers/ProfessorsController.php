@@ -94,6 +94,24 @@ class ProfessorsController extends Controller
         return view('professor.cadastro');
     }
 
+      public function cadastroProfessorSec()
+    {
+        return view('professor.sec_cadastro');
+    }
+
+    public function storeSec(ProfessorCreateRequest $request)
+    {
+         $request   = $this->service->store($request->all());
+         $professor = $request['success'] ? $request['data'] : null;
+
+        session()->flash('success',[
+            'success'  => $request['success'],
+            'messages' => $request['messages'],   
+        ]);
+
+        return redirect()->route('professor.secretario');
+    }
+
 
     public function store(ProfessorCreateRequest $request)
     {
@@ -122,6 +140,16 @@ class ProfessorsController extends Controller
         return view('professor.show',[
             'professor' => $professor,
             //'students'  => $students
+            compact('cursos')
+        ]);
+    }
+     public function showSec($id)
+    {
+        $professors  = Curso::all();
+        $professor = $this->repository->find($id);
+
+        return view('professor.sec_show',[
+            'professor' => $professor,
             compact('cursos')
         ]);
     }
@@ -165,6 +193,15 @@ class ProfessorsController extends Controller
         $professors = $professor->search1($data);
         //dd($professors);
         return view('professor.index', compact('professors'));
+
+    }
+    public function search2(Request $request, Professor $professor){
+
+        $data = $request->all();
+
+        $professors = $professor->search1($data);
+        //dd($professors);
+        return view('professor.secretario', compact('professors'));
 
     }
 }

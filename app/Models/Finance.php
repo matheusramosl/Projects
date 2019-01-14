@@ -55,6 +55,10 @@ class Finance extends Model implements Transformable
 		}
 
 		return $result;
-}
+	}
+
+	public function students(){
+        return $this->hasMany(Student::class);
+    }
 	
 }

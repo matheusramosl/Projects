@@ -12,7 +12,7 @@
 		<h3>{{ session('success')['messages'] }}<h3>	
 	@endif
 
-<a id="defalt-a" href="{{ route('curso.cadastro') }}">Novo Curso</a>
+<a id="defalt-a" href="{{ route('curso.sec_cadastro') }}">Novo Curso</a>
 <table class="default-table">
 	<thead>
 		<tr>

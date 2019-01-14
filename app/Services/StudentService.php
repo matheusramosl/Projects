@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Repositories\StudentRepository;
 use App\Repositories\CursoRepository;
+use App\Repositories\FinanceRepository;
 use App\Validators\StudentValidator;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
@@ -33,7 +34,7 @@ class StudentService
 			
 			return [
 				'success'  => true,
-				'messages' => "Usuário Cadastrado.",
+				'messages' => "Aluno Cadastrado.",
 				'data'	   => $student,
 			];
 			

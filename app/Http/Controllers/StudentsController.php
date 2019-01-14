@@ -85,23 +85,62 @@ class StudentsController extends Controller
         return view('student.cadastro', compact('cursos','planos'));
     }
 
-    public function store(StudentCreateRequest $request)
+     public function cadastroAlunoSec(){
+        $curso = new Curso();
+        $finance = new Finance();
+        
+        $cursos = $curso->getSelectbox();
+        $planos = $finance->getSelectbox();
+
+        return view('student.sec_cadastro', compact('cursos','planos'));
+    }
+
+    public function storeSec(Request $request)
     {        
         $status  = $this->service->store($request->all());
         $student = $status['success'] ? $status['data'] : null;    
+        //$student = $status['success'] ? $status['data'] : null;
         $student->cursos()->attach($request->curso_id);
 
-        $finance = Finance::find($request->plano_id);
-        for ( $i = 0; $i < $finance->quant_parcelas; $i++) { 
+        $vencimento = $request->data_vencimento_inicial;  
+//dd($vencimento);
+        $finances = Finance::find($request->plano_id);
+        for ( $i = 0; $i < $finances->quant_parcelas; $i++) { 
             $alunoPlano = new AlunoPlano;
             $alunoPlano->plano_id = $request->plano_id;
             $alunoPlano->curso_id = $request->curso_id;
             $alunoPlano->student_id = $student->id;
-            $alunoPlano->data_vencimento = Carbon::now()->addMonths($i); //@todo: alterar para pegar a data de vencimento inicial do form
-            
+            $alunoPlano->data_vencimento = Carbon::parse($vencimento)->addMonths($i); //@todo: alterar para pegar a data de vencimento inicial do form
+            //createFromDate(1975, 5, 21)->age;
             $alunoPlano->save();
         }
-       
+        session()->flash('success',[
+            'success'  => $request['success'],
+            'messages' => $request['messages'],   
+        ]);
+
+        return redirect()->route('student.secretario');
+    }
+
+    public function store(Request $request)
+    {        
+        $status  = $this->service->store($request->all());
+        $student = $status['success'] ? $status['data'] : null;    
+        //$student = $status['success'] ? $status['data'] : null;
+        $student->cursos()->attach($request->curso_id);
+
+        $vencimento = $request->data_vencimento_inicial;  
+//dd($vencimento);
+        $finances = Finance::find($request->plano_id);
+        for ( $i = 0; $i < $finances->quant_parcelas; $i++) { 
+            $alunoPlano = new AlunoPlano;
+            $alunoPlano->plano_id = $request->plano_id;
+            $alunoPlano->curso_id = $request->curso_id;
+            $alunoPlano->student_id = $student->id;
+            $alunoPlano->data_vencimento = Carbon::parse($vencimento)->addMonths($i); //@todo: alterar para pegar a data de vencimento inicial do form
+            //createFromDate(1975, 5, 21)->age;
+            $alunoPlano->save();
+        }
         session()->flash('success',[
             'success'  => $request['success'],
             'messages' => $request['messages'],   
@@ -130,8 +169,8 @@ class StudentsController extends Controller
     public function update(Request $request, $student_id)
     {
       $status = $this->service->update($student_id, $request->all());
-      //$student = $status['success'] ? $status['data'] : null;    
-      //$student->cursos()->attach($request->curso_id);
+      $student = $status['success'] ? $status['data'] : null;    
+      $student->cursos()->sync($request->curso_id);
        
         session()->flash('success',[
             'success'  => $request['success'],
@@ -154,14 +193,45 @@ class StudentsController extends Controller
     public function search(Request $request, Students $student, Curso $curso){
 
         $dataForm = $request->all();
-        //$dataF= $request->all();
-
         $students = $student->search($dataForm);
-        //$curso = $curso->search1($dataForm);
-        //dd($dataForm);
-        //return redirect()->route('student.index');
-        return view('student.index', compact('students'));
 
+        return view('student.index', compact('students'));
+    }
+    public function searchS(Request $request, Students $student, Curso $curso){
+
+        $dataForm = $request->all();
+        $students = $student->search($dataForm);
+
+        return view('student.secretario', compact('students'));
+    }
+
+
+    public function payments(Students $student){
+
+        return view('student.payments', compact('students'));
+    }
+    public function efetuarPagamento(Request $request, AlunoPlano $alunoPlano){
+        
+        $finances = Finance::find($id);
+        $alunoPlano = new AlunoPlano;
+        $alunoPlano->data_pagamento = $request->valor_pago;
+        $alunoPlano->save();
+        //$alunoPlano = $request->input('valor_pago');
+
+        /*AlunoPlano::find($id)->update($alunoPlano);
+        AlunoPlano::update($request->all());
+        $enunciado = new Enunciado($request->all());
+        $enunciado->save();*/
+
+        //$status  = $this->service->store($request->all());
+        //$plano->valor_pago = $request->valor_pago;
+
+        /*if ($plano->valor_parcelas) {
+            'pago' = true;
+        }*/
+        //dd($plano);
+
+         return redirect()->route('student.payments');
     }
 
 }
