@@ -33,6 +33,7 @@
 			<td>Email</td>
 			<td>Data de Nascimento</td>
 			<td>Responsável</td>
+			<td>Tel. Responsável</td>
 			<td>igreja</td>
 			<td>Endereço</td>
 			<td>Menu</td>
@@ -53,6 +54,7 @@
 					<td>{{ $student->email }}</td>
 					<td>{{ $student->birth }}</td>
 					<td>{{ $student->responsavel }}</td>
+					<td>{{ $student->phone_resp }}</td>
 					<td>{{ $student->igreja }}</td>
 					<td>{{ $student->endereço }}</td>
 					<td>

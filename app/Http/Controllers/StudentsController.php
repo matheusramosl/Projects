@@ -210,12 +210,20 @@ class StudentsController extends Controller
 
         return view('student.payments', compact('students'));
     }
-    public function efetuarPagamento(Request $request, AlunoPlano $alunoPlano){
+    public function efetuarPagamento(Request $request, AlunoPlano $alunoPlano, $id){
+        /*$finances = Finance::find($request->plano_id);
+        $pagamento = $finances->valor_parcelas;
+        $plano = AlunoPlano::find($id);
+
+
+        $valor_pagamento = valor_parcelas
         
-        $finances = Finance::find($id);
-        $alunoPlano = new AlunoPlano;
-        $alunoPlano->data_pagamento = $request->valor_pago;
-        $alunoPlano->save();
+        //$plano = new AlunoPlano;
+        $plano->data_pagamento = $request->valor_pago;
+        $now = new DateTime();
+$datetime = $now->format('Y-m-d H:i:s'); 
+        $plano = $request->input('valor_pago');
+        $plano->save();
         //$alunoPlano = $request->input('valor_pago');
 
         /*AlunoPlano::find($id)->update($alunoPlano);

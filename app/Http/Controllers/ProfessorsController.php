@@ -14,6 +14,7 @@ use App\Repositories\StudentRepository;
 use App\Services\ProfessorService;
 use App\Models\Curso;
 use App\Models\Professor;
+use App\Models\Students;
 use DB;
 
 /**
@@ -55,18 +56,20 @@ class ProfessorsController extends Controller
     }
     public function indexProfessor()
     {
-        $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
+        //$this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
         $professors = $this->repository->all();
+        $students = $this->repository->all();
 
-        if (request()->wantsJson()) {
+       /* if (request()->wantsJson()) {
 
             return response()->json([
                 'data' => $professors,
             ]);
-        }
+        }*/
 
         return view('professor.index-professor',[
             'professors' => $professors,
+            'students' => $students,
         ]);
 
     }

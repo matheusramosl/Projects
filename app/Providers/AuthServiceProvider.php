@@ -32,7 +32,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         //Assistance Report Gates
         Gate::define( 'access-professor-resource', function($user) {
-            if ($user->isDiretor() || $user->isSecretario() || $user->isAdmin()) {
+            if ($user->isDiretor() || $user->isSecretario() || $user->isAdmin() || $user->isProfessor()) {
                 return true;
             }
 

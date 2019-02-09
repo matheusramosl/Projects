@@ -40,7 +40,7 @@
 		@foreach($students as $student)
 				<tr>
 					<td>{{ $student->id }}</td>
-					<td><a href="{{ route('student.show', $student->id) }}">{{ $student->name }}</a></td>
+					<td><a href="{{ route('student.sec_show', $student->id) }}">{{ $student->name }}</a></td>
 					<td>
 						@foreach($student->cursos as $curso)
 						{{ $curso->name }}

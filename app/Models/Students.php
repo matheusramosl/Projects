@@ -24,6 +24,7 @@ class Students extends Model implements Transformable
     	'endereço',
     	'email',
         'birth',
+        'phone_resp',
     ];
 
     /*public function getBirthAttribute(){
@@ -44,12 +45,16 @@ class Students extends Model implements Transformable
     public function getBirthAttribute($value)
     {
         if(!empty($this->attributes['birth']))
-        return Carbon::parse($value)->format('d-m-Y');
+        return Carbon::parse($value)->format('d/m/Y');
     }
 
     public function getPhoneAttribute(){
         $phone = $this->attributes['phone'];
         return substr($phone, 0, 5).'-'.substr($phone, -4);
+    }
+    public function getPhoneAttribute2(){
+        $phone_resp = $this->attributes['phone_resp'];
+        return substr($phone_resp, 0, 5).'-'.substr($phone_resp, -4);
     }
 
     public function cursos(){

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Models\Secretario;
 
+
 class SecretarioController extends Controller
 {
     public function __construct(){
@@ -46,4 +47,6 @@ class SecretarioController extends Controller
     					->withInput();
     	}
     }
+
+   
 }

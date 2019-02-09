@@ -1,4 +1,4 @@
-@extends('templates.master')
+@extends('templates.master-secretario')
 
 @section('conteudo-view')
 

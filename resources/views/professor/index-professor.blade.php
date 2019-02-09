@@ -49,9 +49,12 @@
                             </thead>
                             <tbody>
 
-                                @foreach($professors as $professor)
-                                    <tr>                                        
-                                        <td id="">{{ $professor -> name}}</td>
+                                @foreach($students as $student)
+                                  
+                                        <td></td>
+                                        <td></td>
+                                                                    
+                                        <td id="">{{ $student -> id}}</td>
                                         <td id="">
                                         <td><input type="radio" name="presenca" id="presenca" value="P" >Presente</td>
                                         <td><input type="radio" name="presenca" id="presenca" value="A" checked>Ausente</td>

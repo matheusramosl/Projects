@@ -9,6 +9,7 @@ use App\Http\Requests\FinanceUpdateRequest;
 use App\Validators\FinanceValidator;
 use App\Repositories\FinanceRepository;
 use App\Services\FinanceService;
+use DB;
 
 class FinancesController extends Controller
 {
@@ -25,7 +26,8 @@ class FinancesController extends Controller
     }
     public function index(){
 
-        $planos = $this->repository->all();
+        //$planos = $this->repository->all();
+        $planos = $this->repository->orderBy('nome_plano', 'ASC')->get();
 
         return view('finance.index',[
             'planos' => $planos,

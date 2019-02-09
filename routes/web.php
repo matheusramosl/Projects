@@ -62,7 +62,10 @@ Route::group(['middleware' => ['auth','can:access-student-resource']], function(
 	Route::resource('student', 'StudentsController');
 	Route::get('/novoAluno', ['as' => 'student.cadastro','uses' => 'StudentsController@cadastroAluno']);
 	Route::get('/pagamento', ['as' => 'student.payments','uses' => 'StudentsController@payments']);
-	Route::get('/aluno_secretario', ['as' => 'student.secretario', 'uses' => 'StudentsController@indexSecretario']);
+	Route::get('/aluno_secretario', ['as' => 'student.secretario', 'uses' => 'SecStudentController@indexSecretario']);
+	Route::get('showSec/{id}', ['as' => 'student.sec_show','uses' => 'SecStudentController@show']);
+	//Route::get('studentSec/{id}', 'SecStudentController@show');
+	//Route::resource('SecStudent', 'SecStudentController');
 	Route::get('/novoAlunoSec', ['as' => 'student.sec_cadastro','uses' => 'StudentsController@cadastroAlunoSec']);
 	Route::get('/aluno_professor', ['as' => 'student.professor', 'uses' => 'StudentsController@indexProfessor']);
 	Route::post('students', 'StudentsController@search')->name('student.search');
