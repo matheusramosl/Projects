@@ -71,7 +71,9 @@ class AlunoPlanoController extends Controller
      */
     public function update(Request $request, AlunoPlano $alunoPlano)
     {
-        //
+        // $alunoPlano->pago = true;
+        // $alunoPlano->payment_type = $request->get('payment_type');
+        // $alunoPlano->save();
     }
 
     /**
