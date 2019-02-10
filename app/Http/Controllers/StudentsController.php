@@ -100,18 +100,16 @@ class StudentsController extends Controller
         $status  = $this->service->store($request->all());
         $student = $status['success'] ? $status['data'] : null;    
         //$student = $status['success'] ? $status['data'] : null;
-        $student->cursos()->attach($request->curso_id);
+        $test = $student->cursos()->attach($request->curso_id);
 
         $vencimento = $request->data_vencimento_inicial;  
-//dd($vencimento);
+
         $finances = Finance::find($request->plano_id);
         for ( $i = 0; $i < $finances->quant_parcelas; $i++) { 
             $alunoPlano = new AlunoPlano;
             $alunoPlano->plano_id = $request->plano_id;
-            $alunoPlano->curso_id = $request->curso_id;
-            $alunoPlano->student_id = $student->id;
+            $alunoPlano->matricula_id = $student->id;
             $alunoPlano->data_vencimento = Carbon::parse($vencimento)->addMonths($i); //@todo: alterar para pegar a data de vencimento inicial do form
-            //createFromDate(1975, 5, 21)->age;
             $alunoPlano->save();
         }
         session()->flash('success',[
@@ -126,19 +124,18 @@ class StudentsController extends Controller
     {        
         $status  = $this->service->store($request->all());
         $student = $status['success'] ? $status['data'] : null;    
-        //$student = $status['success'] ? $status['data'] : null;
-        $student->cursos()->attach($request->curso_id);
-
-        $vencimento = $request->data_vencimento_inicial;  
-//dd($vencimento);
+        $test = $student->cursos()->attach($request->curso_id);
+        
+        $matricula = DB::table('curso_students')->where('curso_id', $request->curso_id)->where('student_id', $student->id)->get();
+        
+        $vencimento = $request->data_vencimento_inicial;
         $finances = Finance::find($request->plano_id);
         for ( $i = 0; $i < $finances->quant_parcelas; $i++) { 
             $alunoPlano = new AlunoPlano;
             $alunoPlano->plano_id = $request->plano_id;
-            $alunoPlano->curso_id = $request->curso_id;
-            $alunoPlano->student_id = $student->id;
+            $alunoPlano->matricula_id = $matricula[0]->id;
             $alunoPlano->data_vencimento = Carbon::parse($vencimento)->addMonths($i); //@todo: alterar para pegar a data de vencimento inicial do form
-            //createFromDate(1975, 5, 21)->age;
+
             $alunoPlano->save();
         }
         session()->flash('success',[

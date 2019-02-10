@@ -45,6 +45,11 @@
 		<li>
 			<a href="{{ route('finance.index')}}">
 				<i class="fas fa-money-check-alt"></i>
+				<h3>Planos</h3>			
+			</a>
+		</li><li>
+			<a href="{{ route('aluno-plano.index')}}">
+				<i class="fas fa-money-check-alt"></i>
 				<h3>Finanças</h3>			
 			</a>
 		</li>

@@ -102,6 +102,7 @@ Route::group(['middleware' => ['auth','can:access-grid-resource']], function(){
 */
 Route::group(['middleware' => ['auth','can:access-finaces-resource']], function(){
 	Route::resource('finance', 'FinancesController');
+	Route::resource('aluno-plano', 'AlunoPlanoController');
 	Route::get('/novoPlano', ['as' => 'finance.cadastro','uses' => 'FinancesController@cadastroFinance']);
 	//Route::get('/grade_secretario', ['as' => 'grid.secretario', 'uses' => 'GridsController@indexSecretario']);
 });
