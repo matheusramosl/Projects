@@ -14,7 +14,7 @@ class AlterAlunoPlanoAddPayType extends Migration
     public function up()
     {
         Schema::table('aluno_plano', function (Blueprint $table) {
-            $table->enum('payment_type', ['crédito', 'débito', 'dinheiro', 'cheque']);
+            $table->enum('payment_type', ['', 'crédito', 'débito', 'dinheiro', 'cheque']);
         });
     }
 
