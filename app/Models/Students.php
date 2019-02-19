@@ -62,7 +62,7 @@ class Students extends Model implements Transformable
     }
 
     public function planos(){
-        return $this->hasMany(AlunoPlano::class, 'student_id');
+        return $this->hasMany(AlunoPlano::class, 'matricula_id');
     }
     public function finances(){
         return $this->belongsTo(Finance::class, 'plano_id');

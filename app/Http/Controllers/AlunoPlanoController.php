@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AlunoPlano;
 use App\Models\CursoStudents;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class AlunoPlanoController extends Controller
 {
@@ -15,8 +16,10 @@ class AlunoPlanoController extends Controller
      */
     public function index()
     {
+       
         $matriculas = CursoStudents::all();
-        return view('aluno-plano.index', compact('matriculas') );
+        $alunoPlanos = AlunoPlano::all();
+        return view('aluno-plano.index', compact('matriculas', 'alunoPlanos') );
     }
 
     /**
@@ -59,7 +62,14 @@ class AlunoPlanoController extends Controller
      */
     public function edit(AlunoPlano $alunoPlano)
     {
-        //
+        $formPag = [
+            'crédito' =>"Crédito",
+            'débito'  =>"Débito",
+            'dinheiro'=>"Dinheiro",
+            'cheque'  =>"Cheque"
+        ];
+        //dd($alunosPlanos);
+        return view('aluno-plano.edit',compact('alunoPlano', 'formPag'));
     }
 
     /**
@@ -71,9 +81,14 @@ class AlunoPlanoController extends Controller
      */
     public function update(Request $request, AlunoPlano $alunoPlano)
     {
-        // $alunoPlano->pago = true;
-        // $alunoPlano->payment_type = $request->get('payment_type');
-        // $alunoPlano->save();
+        //dd($alunoPlano);
+         $alunoPlano->pago = true;
+         $alunoPlano->data_pagamento = Carbon::now();
+         $alunoPlano->payment_type = $request->get('payment_type');
+         $alunoPlano->valor_pago = $request->get('valor_pago');
+         $alunoPlano->save();
+         //$alunosPlanos = AlunoPlano::where('matricula_id', $alunoPlano->matricula_id)->get();
+         return redirect()->action('AlunoPlanoController@index');
     }
 
     /**

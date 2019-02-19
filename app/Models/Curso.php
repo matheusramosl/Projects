@@ -26,6 +26,7 @@ class Curso extends Model implements Transformable
     public function professors(){
     	return $this->belongsTo(Professor::class, 'professor_id');
     }
+
     public function students(){
         return $this->belongsToMany(Students::class, 'curso_students' ,'curso_id', 'student_id');
     }

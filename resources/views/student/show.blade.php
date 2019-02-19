@@ -4,7 +4,6 @@
 
 <header>
 	<h1>{{ $student->name }}</h1>
-	<a href="{{ route('student.payments')}}">pagamentos</a>
 </header>
 <table class="default-table">
 	<thead>
