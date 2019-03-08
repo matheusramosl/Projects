@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Students;
 use App\Repositories\StudentRepository;
+use App\Models\AlunoPlano;
 use App\Models\Curso;
 use DB;
 
 class SecStudentController extends Controller
 {
-	 protected $repository;
+	protected $repository;
 
 
     public function __construct(StudentRepository $repository)
@@ -32,6 +33,14 @@ class SecStudentController extends Controller
      
      public function show(Students $student, $id)
     {
-        return view('student.sec_show',['student' => Students::findOrFail($id)]);
+        $students  = Curso::all();
+        $planos = AlunoPlano::all();
+        $student = $this->repository->find($id);
+        
+
+        return view('student.sec_show',[
+            'student' => Students::findOrFail($id), 
+            compact('students', 'planos')
+        ]);
     }
 }

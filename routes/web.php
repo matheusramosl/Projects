@@ -47,13 +47,14 @@ Route::post('/login', ['as' => 'user.login','uses' => 'DashboardController@auth'
 Route::group(['middleware' => ['auth','can:access-professor-resource']], function(){
 	Route::resource('professor', 'ProfessorsController');
 	Route::get('/novoProfessor', ['as' => 'professor.cadastro','uses' => 'ProfessorsController@cadastroProfessor']);
-	Route::get('/professor_secretario', ['as' => 'professor.secretario','uses' => 'ProfessorsController@indexSecretario']);
+	Route::get('/professor_secretario', ['as' => 'professor.secretario','uses' => 'SecProfessorController@indexSecretario']);
 	Route::get('/novoProfessorSec', ['as' => 'professor.sec_cadastro','uses' => 'ProfessorsController@cadastroProfessorSec']);
-	Route::get('/show1', ['as' => 'professor.sec_show','uses' => 'ProfessorsController@showSec']);
+	Route::get('/show1/{id}', ['as' => 'professor.sec_show','uses' => 'SecProfessorController@show']);
 	Route::get('/professor_chamada', ['as' => 'professor.index-professor','uses' => 'ProfessorsController@indexProfessor']);
 	Route::post('professors', 'ProfessorsController@search1')->name('professor.search1');
-		Route::post('professorSec', 'ProfessorsController@search2')->name('professor.search2');
+	Route::post('professorSec', 'ProfessorsController@search2')->name('professor.search2');
 	Route::post('secProfessor', 'ProfessorsController@storeSec')->name('professor.storeSec');
+	//Route::get('showSec/{id}', ['as' => 'professor.sec_show','uses' => 'SecProfessorController@show']);
 });
 /*
 ------------------Rotas de Aluno-------------------

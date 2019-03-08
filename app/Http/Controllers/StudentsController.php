@@ -219,34 +219,7 @@ class StudentsController extends Controller
         return view('student.payments', compact('students'));
     }
     public function efetuarPagamento(Request $request, AlunoPlano $alunoPlano, $id){
-        /*$finances = Finance::find($request->plano_id);
-        $pagamento = $finances->valor_parcelas;
-        $plano = AlunoPlano::find($id);
-
-
-        $valor_pagamento = valor_parcelas
-        
-        //$plano = new AlunoPlano;
-        $plano->data_pagamento = $request->valor_pago;
-        $now = new DateTime();
-$datetime = $now->format('Y-m-d H:i:s'); 
-        $plano = $request->input('valor_pago');
-        $plano->save();
-        //$alunoPlano = $request->input('valor_pago');
-
-        /*AlunoPlano::find($id)->update($alunoPlano);
-        AlunoPlano::update($request->all());
-        $enunciado = new Enunciado($request->all());
-        $enunciado->save();*/
-
-        //$status  = $this->service->store($request->all());
-        //$plano->valor_pago = $request->valor_pago;
-
-        /*if ($plano->valor_parcelas) {
-            'pago' = true;
-        }*/
-        //dd($plano);
-
+       
          return redirect()->route('student.payments');
     }
 
